@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="vm">
+        <input type="text" v-model="obj.msg">
+        <p>{{ obj.msg }}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#vm",
+            data: {
+                obj: {
+                    msg: "嘿嘿嘿"
+                }
+            },
+            created: function () {
+                console.log(this.obj);
+            }
+        });
+
+        console.log("====");
+
+        var info = {};
+        Object.defineProperty(info, "name", {
+            set: function (value) {
+                name = value;
+                console.log("set name :" + value);
+            },
+            get: function () {
+                return "get name :" + name;
+            }
+        });
+        info.name = "啦啦啦";
+        console.log(info.name);
+        console.log(info);
+    </script>
+</body>
+</html>
