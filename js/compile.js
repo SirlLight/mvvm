@@ -2,7 +2,7 @@
  * @Author: Sommer 
  * @Date: 2018-05-30 17:13:09 
  * @Last Modified by: Sommer
- * @Last Modified time: 2018-05-30 17:37:54
+ * @Last Modified time: 2018-05-30 18:44:32
  */
 
 function Compile (node, sommer) {
@@ -44,8 +44,9 @@ Compile.prototype = {
                         sommer.data[modelName] = e.target.value;
                     });
 
-                    node.value = sommer.data[modelName];    //将数据赋值给节点
+                    //node.value = sommer.data[modelName];    //将数据赋值给节点
                     node.removeAttribute("s-model");    //移除节点上的s-model属性
+                    new Watcher(sommer, node, modelName, "value");
                 }
             }
             
@@ -53,8 +54,9 @@ Compile.prototype = {
 
         if (node.nodeType === 3) {
             if (reg.test(node.nodeValue)) {
-                var value = RegExp.$1.trim();  //匹配到的分隔符里的字符串
-                node.nodeValue = sommer.data[value];    //将数据模型中的该属性值赋值给这个节点
+                var name = RegExp.$1.trim();  //匹配到的分隔符里的字符串
+                //node.nodeValue = sommer.data[name];    //将数据模型中的该属性值赋值给这个节点
+                new Watcher(sommer, node, name, "nodeValue");
             }
         }
     }
