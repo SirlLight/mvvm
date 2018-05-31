@@ -2,7 +2,7 @@
  * @Author: Sommer 
  * @Date: 2018-05-30 17:13:09 
  * @Last Modified by: Sommer
- * @Last Modified time: 2018-05-30 18:44:32
+ * @Last Modified time: 2018-05-31 18:37:59
  */
 
 function Compile (node, sommer) {
@@ -18,10 +18,11 @@ Compile.prototype = {
         var _this = this,
             child,
             frag = document.createDocumentFragment();
-            
+
         while(child = node.firstChild) {
             _this.handleBind(child, sommer);
-            frag.append(child);    //append进文档片段之后，dom中的该节点会自动删除，所以child永远都是第一个子节点，直到子节点劫持完成为止
+            //将所有子节点添加到fragment中，child是指向元素首个子节点的引用。将child引用指向的对象append到父对象的末尾，原来child引用的对象就跳到了frag对象的末尾，而child就指向了本来是排在第二个的元素对象。如此循环下去，链接就逐个往后跳了
+            frag.append(child);    
         }
 
         return frag;
