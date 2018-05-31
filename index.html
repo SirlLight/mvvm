@@ -43,7 +43,7 @@
             this.sommer = sommer;
             this.type = type;
             this.update();
-            Dep.target = null;  //JS的浏览器单线程特性，保证这个全局变量在同一个时间内只会有一个watcher使用
+            Dep.target = null;  //因为它是全局变量，也是 watcher 与 dep 关联的唯一桥梁，任何时刻都必须保证 Dep.target 只有一个值。
         }
 
         Watcher.prototype = {
